@@ -27,6 +27,7 @@ public class Catcher implements Serializable {
 		typeAddressMap = new HashMap<Object, String>();
 
 	}
+	
 
 	public void addTypeAddressMap(Object instance, String address) {
 		typeAddressMap.put(instance, address);

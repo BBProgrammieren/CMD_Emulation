@@ -215,7 +215,7 @@ public class MainViewModel implements Serializable {
 		// TODO Auto-generated method stub
 		return this.closeIsDisabled;
 	}
-
+	
 	public boolean allParams() {
 		if(subBoxNameText.get() != null && !subBoxNameText.get().isEmpty() &&
 		   controllerIPText.get() != null && !controllerIPText.get().isEmpty() &&

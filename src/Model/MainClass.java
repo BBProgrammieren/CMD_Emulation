@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.socket.DatagramPacket;
 import io.netty.util.ReferenceCountUtil;
@@ -29,17 +30,12 @@ public class MainClass {
 		SaveProperties saveProps = new SaveProperties();
 
 		SubBoxManager boxManager = new SubBoxManager();
-//		boxManager.addSubBox(new SubBox(2241, "127.0.0.1", "SUB BOX 3"));
-//		SubBox subBox = boxManager.getBox("SUB BOX 3");	
 
 		boxManager.addSubBox(
 				new SubBox(setSubBoxPort, setHostIP, setHostPort, subBoxAddress, setControllerIP, controller));
 		this.subBox = boxManager.getBox(subBoxAddress);
 
 		parseClients();
-
-		// saveProps.serialize(boxManager);
-		// saveProps.serialize(clientManager);
 
 		this.connection = new Connection(subBox.getSubBoxPort(), subBox.getHostPort(), subBox.getHostIP(),
 				subBox.getControllerIP());
@@ -49,47 +45,35 @@ public class MainClass {
 		try {
 			connection.startup();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		MsgQueueHandler sendCommandAndReceiveAckHandler = new MsgQueueHandler(connection);
-		
-		connection.addHandlerCallback(new MessageHandler() {
 
+		connection.addHandlerCallback(new MessageHandler() {
 			@Override
-		    public boolean acceptInboundMessage(byte[] msg) throws Exception {
-		        return msg.length > 0 && !subBox.isAck(msg);
-		    }
-			
+			public boolean acceptInboundMessage(byte[] msg) throws Exception {
+				return msg.length > 0 && !subBox.isAck(msg);
+			}
+
 			@Override
 			public void handleMessage(ChannelHandlerContext ctx, byte[] msg) {
-				
 
-				
-				Platform.runLater(new Runnable() {
-					@Override
-					public void run() {
-						mainViewModel.updateMainLabelText("Message received!");
-					}
-				});
+				System.out.println("--------------------------");
+				System.out.println("Message received!");
 
 				receivedData = msg;
 				if (!subBox.isAck(receivedData)) {
 					System.out.println("Message Received new: " + Arrays.toString(receivedData));
 					parseMsg();
 				}
-	
 
-				//sendCommandAndReceiveAckHandler.add(msg);
+				// sendCommandAndReceiveAckHandler.add(msg);
 			}
 		});
-		
-		
-		
+
 		connection.addHandlerCallback(sendCommandAndReceiveAckHandler);
 		subBox.addQueueHandler(sendCommandAndReceiveAckHandler);
-		
 
 		mainViewModel.setConnection(connection);
 	}

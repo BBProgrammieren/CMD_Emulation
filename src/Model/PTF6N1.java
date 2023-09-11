@@ -1,10 +1,11 @@
 package Model;
 
 import java.io.ByteArrayOutputStream;
+
 import java.io.IOException;
 import java.util.Arrays;
 
-import ViewModel.PTF6N1Controller;
+//import ViewModel.PTF6N1Controller;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -189,25 +190,25 @@ public class PTF6N1 implements PTFModuleInterface {
 			Scene newScene;
 			Stage newStage = new Stage();
 
-			try {
-				PTF6N1Controller test = new PTF6N1Controller();
-				test.setPTF6N1Model((PTF6N1) catcher.getModuleModel(this.addr));
-				test.setStage(newStage);
-				test.setCatcher(catcher);
-
-				loader.setLocation(getClass().getResource("/View/PTF6N1View.fxml"));
-				loader.setController(test);
-
-				newScene = new Scene(loader.load());
-				newStage.setTitle(this.addr);
-				newStage.setScene(newScene);
-				catcher.addOpened(newStage, this.addr);
-
-				newStage.show();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//			try {
+//				PTF6N1Controller test = new PTF6N1Controller();
+//				test.setPTF6N1Model((PTF6N1) catcher.getModuleModel(this.addr));
+//				test.setStage(newStage);
+//				test.setCatcher(catcher);
+//
+//				loader.setLocation(getClass().getResource("/View/PTF6N1View.fxml"));
+//				loader.setController(test);
+//
+//				newScene = new Scene(loader.load());
+//				newStage.setTitle(this.addr);
+//				newStage.setScene(newScene);
+//				catcher.addOpened(newStage, this.addr);
+//
+//				newStage.show();
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 		});
 	}
 

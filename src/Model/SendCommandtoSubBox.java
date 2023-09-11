@@ -26,7 +26,6 @@ public class SendCommandtoSubBox { // host
 			// String data = "AAAA1D>BWRfR0";
 
 			byte[] byteData = data.getBytes();
-
 			// int crc16 = 55164;
 			int crc16 = crc16_2(byteData);
 			// 1bbf

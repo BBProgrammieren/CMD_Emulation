@@ -39,7 +39,6 @@ public class Connection {
 	private String hostIP;
 	private String subBoxIP;
 	private int runningNr;
-
 	private Channel channel;
 	private NioEventLoopGroup group;
 
