@@ -1,6 +1,10 @@
 package Model;
 
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 public class PTF4N4 implements PTFModuleInterface{
 
@@ -63,33 +67,52 @@ public class PTF4N4 implements PTFModuleInterface{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public void setDisplayText(String str) {
+		openModule();
+		Platform.runLater(() -> {
+			displayText.set(str);
+		});
+	}
+	
+	public void openModule() {
+		if (catcher.containsOpened(this.addr)) {
+			return;
+		}
+
+		Platform.runLater(() -> {
+			FXMLLoader loader = new FXMLLoader();
+			Scene newScene;
+			Stage newStage = new Stage();
+
+//			try {
+//				PTF6N1Controller test = new PTF6N1Controller();
+//				test.setPTF6N1Model((PTF6N1) catcher.getModuleModel(this.addr));
+//				test.setStage(newStage);
+//				test.setCatcher(catcher);
+//
+//				loader.setLocation(getClass().getResource("/View/PTF6N1View.fxml"));
+//				loader.setController(test);
+//
+//				newScene = new Scene(loader.load());
+//				newStage.setTitle(this.addr);
+//				newStage.setScene(newScene);
+//				catcher.addOpened(newStage, this.addr);
+//
+//				newStage.show();
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+		});
+	}
 
 
 	@Override
 	public void setDefaultDisplay(char[] dataChar) {
 	
-			char[] dmode = new char[4];
-			System.arraycopy(dataChar, 7, dmode, 0, 4);
-			String str = "";
-			for (int i = 0; i < dmode.length; i++) {
-				switch (dmode[i]) {
-				case '0':
-					str += " ";
-					break;
-				case '1':
-					str += dataChar[i + 1];
-					break;
-				case '2':
-					str += "";
-					break;
-				case '3':
-					str += "";
-					break;
-				default:
-					str += "";
-					break;
-				}
-			}
+		String brightnessValue = BrightnessController.processBrightness(dataChar);
+		setDisplayText(brightnessValue);
 	}
 	
 	public void increaseValue() {
