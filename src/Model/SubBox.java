@@ -56,6 +56,10 @@ public class SubBox implements Serializable {
 		state = 0;
 
 	}
+	
+	SubBox(){
+		
+	}
 
 	public void setConnection(Connection connection) { // Setter-Methode für Connection
 		this.connection = connection;		
@@ -423,5 +427,6 @@ public class SubBox implements Serializable {
 		// TODO Auto-generated method stub
 		this.queueHandler = sendCommandAndReceiveAckHandler;
 	}
+	
 
 }

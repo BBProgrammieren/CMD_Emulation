@@ -8,6 +8,7 @@ public interface PTFModuleInterface {
 		void setDefaultDisplay(char[] dataChar);
 		void setButtonRole(char[] dataChar);
 		public void setKeyState();
+		void setText();
 
 
 	}

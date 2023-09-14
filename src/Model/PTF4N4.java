@@ -148,5 +148,11 @@ public class PTF4N4 implements PTFModuleInterface{
 		
 	}
 
+	@Override
+	public void setText() {
+		// TODO Auto-generated method stub
+		// zeigt eine vierstellige Zahl an
+	}
+
 	
 }

@@ -4,10 +4,20 @@ import java.util.HashMap;
 
 public class ClientManager{
 
+	private static ClientManager instance = null;
 	private HashMap<String, PTFModuleInterface> clients;
 
-	public ClientManager() {
+	// Privater Konstruktor, sodass kein anderer ClientManager direkt instanziert werden kann
+	private ClientManager() {
 		clients = new HashMap<>();
+	}
+
+	// Öffentliche Methode zur Abrufung der Singleton-Instanz
+	public static ClientManager getInstance() {
+		if (instance == null) {
+			instance = new ClientManager();
+		}
+		return instance;
 	}
 
 	public void addPtf6N1(PTF6N1 ptf) {
@@ -19,7 +29,6 @@ public class ClientManager{
 	}
 
 	public PTFModuleInterface getClient(String addr) {
-
 		return clients.get(addr);
 	}
 	
@@ -36,7 +45,6 @@ public class ClientManager{
 	}
 
 	public void addPtf4N4(PTF4N4 ptf) {
-		// TODO Auto-generated method stub
 		clients.put(ptf.getAddr(), ptf);
 	}
 }

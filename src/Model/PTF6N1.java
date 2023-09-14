@@ -304,4 +304,10 @@ public class PTF6N1 implements PTFModuleInterface {
 
 	}
 
+	@Override
+	public void setText() {
+		// TODO Auto-generated method stub
+		// zeigt eine sechstellige Zahl an
+	}
+
 }

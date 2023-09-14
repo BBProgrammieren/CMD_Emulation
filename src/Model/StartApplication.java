@@ -6,6 +6,41 @@ import java.util.Scanner;
 
 public class StartApplication {
 	
+	
+	 public static void runWithParameters(int param1, int param2, String param3, String param4, String param5) {
+	        SerializerClass serializer = new SerializerClass();
+	        MainViewModel mainViewModel = new MainViewModel();
+	        Catcher controller = new Catcher();
+	        Boolean deserialized = false;
+
+	        controller = serializer.deserializeModules();
+
+	        if (controller == null) {
+	            controller = new Catcher();
+	        }
+
+	        File file = new File("savedState.ser");
+	        if (file.exists() && !file.isDirectory()) {
+	            try {
+	                serializer.deserializeMainViewModel(mainViewModel);
+	                deserialized = true;
+	            } catch (Exception e) {
+	                System.out.println("Fehler beim Deserialisieren: " + e.getMessage());
+	            }
+	        }
+
+	        controller.setMainModel(mainViewModel);
+
+	        // Direkte Nutzung der Parameter ohne Benutzereingabe
+	        int parameter1 = param1;
+	        int parameter2 = param2;
+	        String parameter3 = param3;
+	        String parameter4 = param4;
+	        String parameter5 = param5;
+
+	       // manageMap(controller);
+	        new MainClass(parameter1, parameter2, parameter3, parameter4, parameter5, controller, mainViewModel);
+	    }
 
 	public static void main(String[] args) {
 

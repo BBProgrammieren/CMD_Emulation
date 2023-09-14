@@ -19,7 +19,6 @@ public class MainClass {
 	private byte[] receivedData;
 	private final String ptf6n1 = "PTF6N1";
 	private final String ptf4n4 = "PTF4N4";
-	private ClientManager clientManager = new ClientManager();
 	private String subBoxAddress;
 
 	public MainClass(int setSubBoxPort, int setHostPort, String setHostIP, String setControllerIP, String subBoxAddress,
@@ -96,15 +95,15 @@ public class MainClass {
 				return;
 			}
 			if (subBox.getReceivedSubBoxAddress(receivedData).equals("????")) {
-				subBox.send0Ack(connection, clientManager);
+				subBox.send0Ack(connection, ClientManager.getInstance());
 				System.out.println("ACK was sent successfully!");
 				return;
 			}
 
-			if (clientManager.existPTF(subBox.getPTFAddr(receivedData))
+			if (ClientManager.getInstance().existPTF(subBox.getPTFAddr(receivedData))
 					&& subBox.getReceivedSubBoxAddress(receivedData).equals(subBoxAddress)) {
 				if (receivedData[6] == 0x44) {
-					subBox.sendAck(connection, clientManager);
+					subBox.sendAck(connection, ClientManager.getInstance());
 					System.out.println("ACK was sent successfully!");
 				}
 			} else {
@@ -121,9 +120,9 @@ public class MainClass {
 			String value = entry.getValue();
 
 			if (value.equals(ptf6n1)) {
-				clientManager.addPtf6N1((PTF6N1) controller.getModuleModel(key));
+				ClientManager.getInstance().addPtf6N1((PTF6N1) controller.getModuleModel(key));
 			} else if (value.equals(ptf4n4)) {
-				clientManager.addPtf4N4((PTF4N4) controller.getModuleModel(key));
+				ClientManager.getInstance().addPtf4N4((PTF4N4) controller.getModuleModel(key));
 			} else {
 
 			}
