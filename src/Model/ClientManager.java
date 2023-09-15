@@ -40,9 +40,9 @@ public class ClientManager{
 	    return clients.containsKey(addr) || addr == null;
 	}
 	
-	public HashMap<String, PTFModuleInterface> getHashMap(){
-		return clients;		
-	}
+	 public HashMap<String, PTFModuleInterface> getAllClients() {
+	        return clients;
+	    }
 
 	public void addPtf4N4(PTF4N4 ptf) {
 		clients.put(ptf.getAddr(), ptf);
