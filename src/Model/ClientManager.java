@@ -33,11 +33,11 @@ public class ClientManager{
 	}
 	
 	public boolean existPTF(String addr) {
-		boolean bool = false;
-		if (clients.containsKey(addr) || addr == null) {
-			bool = true;
-		}
-		return bool;
+	    return isClientValid(addr);
+	}
+
+	private boolean isClientValid(String addr) {
+	    return clients.containsKey(addr) || addr == null;
 	}
 	
 	public HashMap<String, PTFModuleInterface> getHashMap(){
